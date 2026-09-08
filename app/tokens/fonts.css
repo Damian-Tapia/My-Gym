@@ -1,0 +1,4 @@
+/* My-Gym webfonts. No brand font files were supplied with the project, so the
+   system uses Google Fonts as the canonical source. Swap these for self-hosted
+   @font-face rules if licensed binaries become available. */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
