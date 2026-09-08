@@ -1,0 +1,12 @@
+:root{
+/* On a near-black app, depth comes from hairlines and glow, not soft grey drops. */
+--shadow-none:none;
+--shadow-card:0 1px 0 0 rgba(255,255,255,0.03) inset, 0 8px 24px -12px rgba(0,0,0,0.9);
+--shadow-raised:0 12px 32px -14px rgba(0,0,0,0.95);
+--shadow-sheet:0 -12px 40px -12px rgba(0,0,0,0.9);
+--shadow-accent-glow:0 6px 24px -8px rgba(255,159,28,0.55);
+--shadow-focus:0 0 0 3px rgba(255,159,28,0.35);
+--blur-scrim:blur(16px); /* @kind other */
+--overlay-hover:rgba(255,255,255,0.05); /* @kind color */
+--overlay-press:rgba(0,0,0,0.25); /* @kind color */
+}
