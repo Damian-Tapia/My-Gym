@@ -1,0 +1,46 @@
+<!-- @dsCard group="Mobile app" viewport="1240x900" name="MyGym app" subtitle="Onboarding, Hoy, entrenamiento activo, progreso y perfil" -->
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>MyGym — UI kit</title>
+<link rel="stylesheet" href="../../styles/styles.css">
+<style>body{margin:0;background:#08080A;font-family:var(--font-sans);color:var(--text-primary);padding:40px 24px;display:flex;justify-content:center}
+a{color:var(--text-accent);text-decoration:none}a:hover{color:var(--amber-400)}
+.wrap{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;align-items:flex-start}</style></head>
+<body><div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script>window.MYGYM_ICON_BASE='../../public/icons/'</script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel" src="PhoneFrame.jsx"></script>
+<script type="text/babel" src="OnboardingScreens.jsx"></script>
+<script type="text/babel" src="HomeScreen.jsx"></script>
+<script type="text/babel" src="WorkoutScreen.jsx"></script>
+<script type="text/babel" src="ProfileScreen.jsx"></script>
+<script type="text/babel">
+const EXERCISES = [
+  { name: 'Press de banca', machine: 'Banca plana' },
+  { name: 'Prensa de piernas', machine: 'Prensa 45°' },
+  { name: 'Jalón al pecho', machine: 'Polea alta' },
+  { name: 'Remo sentado', machine: 'Polea baja' },
+  { name: 'Elevaciones laterales', machine: 'Mancuernas' },
+  { name: 'Plancha', machine: 'Peso corporal' },
+];
+function App(){
+  const [onboarded,setOnboarded]=React.useState(false);
+  const [tab,setTab]=React.useState('home');
+  const [workout,setWorkout]=React.useState(null);
+  const app = () => {
+    if (!onboarded) return <OnboardingFlow onFinish={()=>setOnboarded(true)} />;
+    if (workout !== null) return <WorkoutScreen exercise={EXERCISES[workout]} index={workout} total={EXERCISES.length} onBack={()=>setWorkout(null)} onFinish={()=>setWorkout(null)} />;
+    if (tab === 'routines') return <RoutinesScreen tab={tab} setTab={setTab} />;
+    if (tab === 'progress') return <ProgressScreen tab={tab} setTab={setTab} />;
+    if (tab === 'profile') return <ProfileScreen tab={tab} setTab={setTab} onRestart={()=>{setOnboarded(false);setTab('home')}} />;
+    return <HomeScreen tab={tab} setTab={setTab} onStart={()=>setWorkout(0)} onOpenExercise={(i)=>setWorkout(i)} />;
+  };
+  return <div className="wrap">
+    <PhoneFrame label={!onboarded ? 'Onboarding' : workout !== null ? 'Entrenamiento activo' : 'App'}>{app()}</PhoneFrame>
+    <PhoneFrame label="Hoy"><HomeScreen tab="home" setTab={()=>{}} onStart={()=>{}} onOpenExercise={()=>{}} /></PhoneFrame>
+    <PhoneFrame label="Progreso"><ProgressScreen tab="progress" setTab={()=>{}} /></PhoneFrame>
+  </div>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script></body></html>
