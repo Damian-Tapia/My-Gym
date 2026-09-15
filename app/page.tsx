@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation'
 import { useSession } from '@/hooks/useSession'
 import { login } from '@/lib/auth'
 import { getFullProfile } from '@/lib/profile'
-import { Button } from '@/components/core/Button'
-import { Input } from '@/components/forms/Input'
+import { Button } from '@/app/components/core/Button'
+import { Input } from '@/app/components/forms/Input'
 import './page.css'
 
 export default function Page() {

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from '@/hooks/useSession'
 import { logout } from '@/lib/auth'
-import { Button } from '@/components/core/Button'
+import { Button } from '@/app/components/core/Button'
 
 export default function DashboardPage() {
   const router = useRouter()
