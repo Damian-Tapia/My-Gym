@@ -1,0 +1,52 @@
+.page-logged-in {
+  padding: 32px;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+}
+
+.login-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 0 var(--gutter-screen, 20px);
+}
+
+.login-header {
+  margin-bottom: 32px;
+}
+
+.login-wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 36px;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.login-wordmark-accent {
+  color: var(--amber-500);
+}
+
+.login-title {
+  margin: 12px 0 4px;
+  font: var(--text-h1);
+  letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
+}
+
+.login-subtitle {
+  margin: 0;
+  font: var(--text-body);
+  color: var(--text-secondary);
+}
+
+.login-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-spacer {
+  height: 4px;
+}

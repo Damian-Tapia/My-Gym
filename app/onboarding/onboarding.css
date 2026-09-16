@@ -1,0 +1,32 @@
+.onboarding-root {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.onboarding-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px var(--gutter-screen, 20px) 14px;
+  flex: 0 0 auto;
+}
+
+.onboarding-back {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.onboarding-skip {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: var(--text-caption);
+  color: var(--text-muted);
+}
