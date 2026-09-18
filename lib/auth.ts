@@ -24,6 +24,7 @@ export async function getSession() {
 
 export async function getMyProfile(): Promise<Profile | null> {
   const { data: { user } } = await supabase.auth.getUser()
+  
   if (!user) return null
   const { data, error } = await supabase
     .from('profiles')
@@ -31,6 +32,7 @@ export async function getMyProfile(): Promise<Profile | null> {
     .eq('id', user.id)
     .single()
   if (error) return null
+  console.table(data)
   return data as Profile
 }
 

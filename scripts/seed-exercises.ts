@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 // ── Fill these in ──────────────────────────────────────────────────────────────
-const SUPABASE_URL = ''
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_UR
 const SUPABASE_SERVICE_ROLE_KEY = ''   // Settings → API → service_role (never expose client-side)
 const EXERCISES_API_URL = 'https://oss.exercisedb.dev/api/v1/exercises'           // e.g. https://oss.exercisedb.dev/api/v1/exercises
 // ──────────────────────────────────────────────────────────────────────────────

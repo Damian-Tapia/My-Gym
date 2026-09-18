@@ -1,46 +1,29 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from '@/hooks/useSession'
-import { login } from '@/lib/auth'
-import { getFullProfile } from '@/lib/profile'
+import { signUp } from '@/lib/auth'
 import { Button } from '@/app/components/core/Button'
 import { Input } from '@/app/components/forms/Input'
-import './page.css'
+import '@/app/page.css'
 
-export default function Page() {
+export default function RegisterPage() {
   const router = useRouter()
-  const { session, loading } = useSession()
+  const [name, setName]         = useState('')
   const [email, setEmail]       = useState('')
   const [password, setPassword] = useState('')
   const [error, setError]       = useState<string | null>(null)
   const [busy, setBusy]         = useState(false)
 
-  useEffect(() => {
-    if (!loading && session) {
-      getFullProfile().then(profile => {
-        router.replace(profile?.onboarding_done ? '/dashboard' : '/onboarding')
-      })
-    }
-  }, [session, loading, router])
-
-  if (loading || session) return null
-
-  async function handleLogin() {
+  async function handleRegister() {
     setError(null)
     setBusy(true)
-    const result = await login(email, password)
+    const result = await signUp(email, password, name)
     setBusy(false)
     if ('error' in result) {
       setError(result.error ?? 'Error desconocido')
       return
     }
-    const profile = await getFullProfile()
-    if (!profile) {
-      setError('No se encontró perfil. Intenta registrarte de nuevo.')
-      return
-    }
-    router.push(profile.onboarding_done ? '/dashboard' : '/onboarding')
+    router.push('/onboarding')
   }
 
   return (
@@ -49,13 +32,21 @@ export default function Page() {
         <div className="login-wordmark">
           My<span className="login-wordmark-accent">Gym</span>
         </div>
-        <h1 className="login-title">Vuelve a entrar</h1>
+        <h1 className="login-title">Crea tu cuenta</h1>
         <p className="login-subtitle">
-          Tu historial sigue aquí, aunque hayas parado dos semanas o dos años.
+          Empieza a registrar tu progreso hoy.
         </p>
       </article>
 
       <form className="login-fields">
+        <Input
+          label="Nombre"
+          type="text"
+          placeholder="Tu nombre"
+          icon="user"
+          value={name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+        />
         <Input
           label="Correo"
           type="email"
@@ -77,17 +68,17 @@ export default function Page() {
           size="lg"
           fullWidth
           disabled={busy || !email || !password}
-          onClick={handleLogin}
+          onClick={handleRegister}
         >
-          {busy ? 'Entrando…' : 'Entrar'}
+          {busy ? 'Creando cuenta…' : 'Crear cuenta'}
         </Button>
         <Button
           size="lg"
           fullWidth
           variant="ghost"
-          onClick={() => router.push('/register')}
+          onClick={() => router.push('/')}
         >
-          Crear cuenta nueva
+          Ya tengo cuenta
         </Button>
       </form>
     </section>
